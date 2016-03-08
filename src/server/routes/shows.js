@@ -7,7 +7,15 @@ function Shows() {
 };
 
 router.get('/shows', function(req, res, next) {
-  res.status(200).json('testing');
+  Shows().select().then(function(data) {
+    res.status(200).json(data);
+  })
 });
+
+router.get('/shows/:id', function(req, res, next) {
+  Shows().where('id', req.params.id).select().then(function(data) {
+    res.status(200).json(data);
+  })
+})
 
 module.exports = router;
